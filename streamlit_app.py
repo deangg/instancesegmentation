@@ -89,7 +89,10 @@ with upload_tab:
     upload = st.file_uploader("JPG PNG WEBP or BMP", type=UPLOAD_TYPES)
 with sample_tab:
     samples = sample_images(fruit)
-    picked = st.selectbox("Sample image", ["None"] + [p.name for p in samples]) if samples else None
+    options = ["None"] + [p.name for p in samples]
+    requested = st.query_params.get("sample")
+    start = options.index(requested) if requested in options else 0
+    picked = st.selectbox("Sample image", options, index=start) if samples else None
     if not samples:
         st.write("No sample images for this fruit.")
 

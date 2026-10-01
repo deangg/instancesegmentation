@@ -74,7 +74,54 @@
           "mAP50_95": 0.272
         }
       },
-      "test_checkpoint_sha256": "60a6307c77c35e9ea0887dbdff20a054299414f3de88cebfa31d91107489f74d"
+      "test_checkpoint_sha256": "60a6307c77c35e9ea0887dbdff20a054299414f3de88cebfa31d91107489f74d",
+      "test_local_reproduction": {
+        "images": 79,
+        "precision": 0.719,
+        "recall": 0.593,
+        "mAP50": 0.602,
+        "mAP50_95": 0.397,
+        "note": "Same checkpoint re-evaluated on Mac (MPS). Small gap to Colab CUDA result."
+      },
+      "test_without_near_duplicates": {
+        "images": 59,
+        "removed": 20,
+        "method": "16x16 difference hash, <=20 of 256 bits from any training image",
+        "precision": 0.722,
+        "recall": 0.47,
+        "mAP50": 0.504,
+        "mAP50_95": 0.302,
+        "per_class": {
+          "bruise_discoloration": {
+            "precision": 0.548,
+            "recall": 0.347,
+            "mAP50": 0.305,
+            "mAP50_95": 0.101
+          },
+          "rot_mold_decay": {
+            "precision": 0.773,
+            "recall": 0.692,
+            "mAP50": 0.693,
+            "mAP50_95": 0.488
+          },
+          "surface_damage": {
+            "precision": 0.846,
+            "recall": 0.37,
+            "mAP50": 0.515,
+            "mAP50_95": 0.318
+          }
+        }
+      },
+      "near_duplicates_in_train": {
+        "valid": "64 of 215",
+        "test": "20 of 79",
+        "main_source": "Lab2Wild repeated views"
+      },
+      "test_mean_pixel_iou": {
+        "value": 0.583,
+        "images": 62,
+        "note": "Per image class-aware IoU of predicted vs labeled defect pixels at conf 0.25, test images with a labeled defect"
+      }
     }
   },
   "tomato": {
