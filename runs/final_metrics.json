@@ -1,0 +1,30 @@
+{
+  "note": "Mask metrics. null means not measured yet. Validation numbers are not unseen test results.",
+  "apple": {
+    "stage1": {
+      "run": 21,
+      "model": "yolo26l-seg",
+      "epochs_done": 34,
+      "validation": {"images": 215, "instances": 219, "precision": 1.000, "recall": 0.986, "mAP50": 0.985, "mAP50_95": 0.985}
+    },
+    "stage2": {
+      "run": 22,
+      "model": "Run 21 best.pt (yolo26l-seg)",
+      "status": "training",
+      "best_epoch": 65,
+      "epochs_done": 90,
+      "validation": {"images": 215, "precision": 0.785, "recall": 0.645, "mAP50": 0.688, "mAP50_95": 0.458},
+      "validation_per_class": {
+        "bruise_discoloration": null,
+        "rot_mold_decay": null,
+        "surface_damage": null
+      },
+      "test": null,
+      "test_per_class": null
+    }
+  },
+  "tomato": {
+    "stage1": null,
+    "stage2": null
+  }
+}
