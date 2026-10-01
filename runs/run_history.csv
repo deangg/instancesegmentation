@@ -18,4 +18,4 @@ order,run,date,dataset,fruits,classes,train_img,val_img,test_img,model,imgsz,epo
 17,Run 19 (Stage 1),2026-10-01,apple-stage1-whole-oct01,apple,apple,2110,215,79,yolo26m-seg,864,21,100,56,SGD,0.001,0.991,0.981,0.985,0.985,per-class checkpoint validation,two-stage method Stage 1 (26m)
 18,Run 20 (Stage 2),2026-10-01,apple-stage2-defects-oct01,apple,3 defects,2110,215,79,Run 19 best.pt (26m),864,91,300,56,AdamW,0.0005,0.812,0.632,0.671,0.450,per-class checkpoint validation,two-stage method Stage 2 (26m)
 19,Run 21 (Stage 1),2026-10-01,apple-stage1-whole-oct01,apple,apple,2110,215,79,yolo26l-seg,864,34,100,56,SGD,0.001,1.000,0.986,0.985,0.985,per-class checkpoint validation,final Stage 1 (26l)
-20,Run 22 (Stage 2),2026-10-01,apple-stage2-defects-oct01,apple,3 defects,2110,215,79,Run 21 best.pt (26l),864,90,300,56,AdamW,0.0005,0.785,0.645,0.688,0.458,results.csv best epoch 65 (provisional),final Stage 2 (26l) still training
+20,Run 22 (Stage 2),2026-10-01,apple-stage2-defects-oct01,apple,3 defects,2110,215,79,Run 21 best.pt (26l),864,124,300,56,AdamW,0.0005,0.809,0.680,0.688,0.457,per-class checkpoint validation,final Stage 2 (26l). Test mAP50 0.613
