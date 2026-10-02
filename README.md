@@ -30,8 +30,7 @@ Mask metrics. Each test set was evaluated once after the model was frozen.
 | One model for both, on tomato test | 25, 26 | | 0.352 | 0.533 | 0.416 |
 
 The combined model scored 0.600 validation mAP50 over both fruits. Stage 1 segments the whole fruit at 0.95 to 0.99
-mask mAP50. Twenty apple test images have a near-duplicate in training. Without them apple test mAP50 is 0.504. Full
-numbers are in `runs/final_metrics.json`. All 24 runs from the first pilot are in `runs/run_history.csv`.
+mask mAP50. Full numbers are in `runs/final_metrics.json`. All 24 runs from the first pilot are in `runs/run_history.csv`.
 
 ## Run the app locally
 

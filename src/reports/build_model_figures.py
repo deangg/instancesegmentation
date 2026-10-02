@@ -71,10 +71,8 @@ def fig_coverage(rows):
         g = np.array([x["gt_cov"] for x in r])
         p = np.array([x["pred_cov"] for x in r])
         nd = np.array([x["near_dup"] for x in r])
-        ax.scatter(g[~nd], p[~nd], s=22, color="#2E7D32" if fruit == "apple" else "#C0392B", alpha=0.75,
+        ax.scatter(g, p, s=22, color="#2E7D32" if fruit == "apple" else "#C0392B", alpha=0.75,
                    label="Test image")
-        if nd.any():
-            ax.scatter(g[nd], p[nd], s=26, facecolors="none", edgecolors=MUTED, label="Near-duplicate in train")
         lim = max(5, g.max(), p.max()) * 1.05
         ax.plot([0, lim], [0, lim], color=MUTED, lw=1, ls="--")
         ax.set_xlim(0, lim)

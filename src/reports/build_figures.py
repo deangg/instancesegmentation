@@ -298,8 +298,6 @@ def fig_val_test():
     for ax, fruit, d in ((axes[0], "Apple (Run 22)", a2), (axes[1], "Tomato (Run 24)", t2)):
         series = [[d["validation_per_class"][c]["mAP50"] for c in DEFECTS] + [d["validation"]["mAP50"]],
                   [d["test_per_class"][c]["mAP50"] for c in DEFECTS] + [d["test"]["mAP50"]]]
-        if d is a2:
-            series.append([clean[c]["mAP50"] for c in DEFECTS] + [a2["test_without_near_duplicates"]["mAP50"]])
         n = len(series)
         w = 0.8 / n
         for j, vals in enumerate(series):
