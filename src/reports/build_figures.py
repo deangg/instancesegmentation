@@ -83,9 +83,9 @@ def square(img, size=420):
 # 1. Pipeline diagram ---------------------------------------------------------------------------
 def fig_pipeline():
     steps = [
-        ("Image sources", "AFruitDB, Lab2Wild,\nteam photos,\nRoboflow tomato set"),
-        ("Pixel masks", "Roboflow and\nSAM-assisted tool.\nEvery mask reviewed"),
-        ("Frozen splits", "By capture group.\nNear-duplicate\ncheck (dHash)"),
+        ("Image sources", "AFruitDB apple\nand tomato, Lab2Wild,\nteam photos"),
+        ("Pixel masks", "Polygons drawn\nin Roboflow.\nEvery mask reviewed"),
+        ("Frozen splits", "By capture group.\nNo exact copies\nacross splits"),
         ("Stage 1", "YOLO26l-seg learns\nthe whole fruit\n(SGD, lr 0.001)"),
         ("Stage 2", "Starts from Stage 1.\nLearns 3 defects\n(AdamW, lr 0.0005)"),
         ("Unseen test", "Run once per model\nafter freezing.\nPer class, per fruit"),
