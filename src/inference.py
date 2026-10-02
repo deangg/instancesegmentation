@@ -29,8 +29,10 @@ CLASS_LABELS = {
 }
 
 FRUITS = {
-    "Apple": {"stage1": "apple_stage1.pt", "stage2": "apple_stage2.pt"},
-    "Tomato": {"stage1": "tomato_stage1.pt", "stage2": "tomato_stage2.pt"},
+    "Apple": {"stage1": "apple_stage1.pt", "stage2": "apple_stage2.pt", "samples": ["apple"]},
+    "Tomato": {"stage1": "tomato_stage1.pt", "stage2": "tomato_stage2.pt", "samples": ["tomato"]},
+    "Both (one model)": {"stage1": "apple_tomato_stage1.pt", "stage2": "apple_tomato_stage2.pt",
+                         "samples": ["apple", "tomato"]},
 }
 
 
@@ -47,6 +49,7 @@ class Prediction:
     image: np.ndarray
     detections: List[Detection] = field(default_factory=list)
     fruit_mask: Optional[np.ndarray] = None
+    fruit_name: Optional[str] = None
     seconds: float = 0.0
 
 
@@ -97,15 +100,19 @@ def predict(defect_model, image: np.ndarray, conf: float, imgsz: int = 864,
             area_px=int(mask.sum()),
         ))
 
-    fruit_mask = None
+    fruit_mask, fruit_name = None, None
     if fruit_model is not None:
         fruit_result = fruit_model.predict(bgr, conf=0.5, imgsz=imgsz, retina_masks=True, verbose=False)[0]
         fruit_masks = _masks_to_image_size(fruit_result, height, width)
         if fruit_masks:
             fruit_mask = np.logical_or.reduce(fruit_masks)
+            # The combined Stage 1 model names the fruit. Take its most confident mask.
+            best = int(fruit_result.boxes.conf.argmax())
+            fruit_name = fruit_result.names[int(fruit_result.boxes.cls[best])]
 
     seconds = time.perf_counter() - start
-    return Prediction(image=image, detections=detections, fruit_mask=fruit_mask, seconds=seconds)
+    return Prediction(image=image, detections=detections, fruit_mask=fruit_mask, fruit_name=fruit_name,
+                      seconds=seconds)
 
 
 def overlay(prediction: Prediction, visible: Dict[str, bool], alpha: float = 0.45,

@@ -35,10 +35,12 @@ def load_model(path: str):
 
 
 def sample_images(fruit: str):
-    folder = SAMPLES_DIR / fruit.lower()
-    if not folder.is_dir():
-        return []
-    return sorted(p for p in folder.iterdir() if p.suffix.lower() in {".jpg", ".jpeg", ".png"})
+    images = []
+    for name in FRUITS[fruit]["samples"]:
+        folder = SAMPLES_DIR / name
+        if folder.is_dir():
+            images += sorted(p for p in folder.iterdir() if p.suffix.lower() in {".jpg", ".jpeg", ".png"})
+    return images
 
 
 def legend(names):
@@ -89,9 +91,12 @@ with upload_tab:
     upload = st.file_uploader("JPG PNG WEBP or BMP", type=UPLOAD_TYPES)
 with sample_tab:
     samples = sample_images(fruit)
-    options = ["None"] + [p.name for p in samples]
+    by_name = {f"{p.parent.name}/{p.name}": p for p in samples}
+    options = ["None"] + list(by_name)
     requested = st.query_params.get("sample")
-    start = options.index(requested) if requested in options else 0
+    # Accept either "apple/rot_a.jpg" or a bare file name
+    matches = [o for o in options if requested and (o == requested or o.endswith("/" + requested))]
+    start = options.index(matches[0]) if matches else 0
     picked = st.selectbox("Sample image", options, index=start) if samples else None
     if not samples:
         st.write("No sample images for this fruit.")
@@ -100,7 +105,7 @@ image_source, image_name = None, None
 if upload is not None:
     image_source, image_name = upload, upload.name
 elif picked and picked != "None":
-    image_source, image_name = SAMPLES_DIR / fruit.lower() / picked, picked
+    image_source, image_name = by_name[picked], picked
 
 if image_source is None:
     st.info("Upload a photo or pick a sample to run the model.")
@@ -129,7 +134,7 @@ shown = [d for d in prediction.detections if visible.get(d.class_name, True)]
 if fruit_model is None:
     fruit_status = "Not checked"
 else:
-    fruit_status = "Yes" if prediction.fruit_mask is not None else "No"
+    fruit_status = prediction.fruit_name.capitalize() if prediction.fruit_mask is not None else "No"
 metric_cols = st.columns(3)
 metric_cols[0].metric("Defect regions", len(shown))
 metric_cols[1].metric("Inference time", f"{prediction.seconds * 1000:.0f} ms")

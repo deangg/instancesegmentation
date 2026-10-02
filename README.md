@@ -18,15 +18,20 @@ Stage 1 segments the whole fruit. Stage 2 starts from the Stage 1 weights and se
 
 Masks describe appearance only. They are not a disease diagnosis.
 
-## Results (apple)
+## Results
 
-| Model | Split | Mask P | Mask R | mAP50 | mAP50-95 |
+Mask metrics. Each test set was evaluated once after the model was frozen.
+
+| Model | Runs | Val mAP50 | Test mAP50 | Test P | Test R |
 |---|---|---:|---:|---:|---:|
-| Stage 1 Run 21 (YOLO26l) | Validation | 1.000 | 0.986 | 0.985 | 0.985 |
-| Stage 2 Run 22 (YOLO26l) | Validation | see `runs/final_metrics.json` | | | |
-| Stage 2 Run 22 (YOLO26l) | Test | see `runs/final_metrics.json` | | | |
+| Apple, two-stage YOLO26l | 21, 22 | 0.688 | 0.613 | 0.718 | 0.597 |
+| Tomato, two-stage YOLO26l | 23, 24 | 0.494 | 0.393 | 0.732 | 0.375 |
+| One model for both, on apple test | 25, 26 | | 0.586 | 0.769 | 0.591 |
+| One model for both, on tomato test | 25, 26 | | 0.352 | 0.533 | 0.416 |
 
-All 20 runs from the first pilot to the final model are in `runs/run_history.csv`.
+The combined model scored 0.600 validation mAP50 over both fruits. Stage 1 segments the whole fruit at 0.95 to 0.99
+mask mAP50. Twenty apple test images have a near-duplicate in training. Without them apple test mAP50 is 0.504. Full
+numbers are in `runs/final_metrics.json`. All 24 runs from the first pilot are in `runs/run_history.csv`.
 
 ## Run the app locally
 
@@ -43,8 +48,10 @@ Put the checkpoints in `models/`:
 |---|---|
 | `apple_stage1.pt` | `MyDrive/YOLOv26/runs/apple-stage1-whole-oct01/run21_*/weights/best.pt` |
 | `apple_stage2.pt` | `MyDrive/YOLOv26/runs/apple-stage2-defects-oct01/run22_*/weights/best.pt` |
-| `tomato_stage1.pt` | Tomato Stage 1 `best.pt` |
-| `tomato_stage2.pt` | Tomato Stage 2 `best.pt` |
+| `tomato_stage1.pt` | `MyDrive/YOLOv26/runs/tomato-stage1-whole-oct01/run23_*/weights/best.pt` |
+| `tomato_stage2.pt` | `MyDrive/YOLOv26/runs/tomato-stage2-defects-oct01/run24_*/weights/best.pt` |
+| `apple_tomato_stage1.pt` | `MyDrive/YOLOv26/runs/apple-tomato-stage1-whole-oct01/run25_*/weights/best.pt` |
+| `apple_tomato_stage2.pt` | `MyDrive/YOLOv26/runs/apple-tomato-stage2-defects-oct01/run26_*/weights/best.pt` |
 
 The app accepts JPG PNG WEBP and BMP uploads or built-in samples. It shows colored masks with a legend, each
 defect's share of the image and of the fruit, inference time and a PNG download. A missing model or an unreadable
@@ -56,7 +63,7 @@ file gives a clear message instead of an error.
 streamlit_app.py     web app
 src/inference.py     prediction, overlay and coverage helpers used by the app
 notebooks/           training and evaluation notebook (Colab, outputs kept)
-runs/                run history, final metrics and plots for Runs 20 to 22
+runs/                run history, final metrics and plots for Runs 20 to 26
 paper/               IEEE paper (.docx)
 slides/              final defense deck (.pptx)
 reports/figures/     charts and example images
