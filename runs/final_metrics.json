@@ -121,6 +121,11 @@
         "value": 0.583,
         "images": 62,
         "note": "Per image class-aware IoU of predicted vs labeled defect pixels at conf 0.25, test images with a labeled defect"
+      },
+      "test_coverage_agreement": {
+        "images": 78,
+        "pearson_r": 0.906,
+        "mae_points": 5.24
       }
     }
   },
@@ -209,6 +214,16 @@
         "method": "16x16 difference hash, <=20 of 256 bits from any training image",
         "test": "0 of 95",
         "valid": "1 of 132"
+      },
+      "test_coverage_agreement": {
+        "images": 93,
+        "pearson_r": 0.817,
+        "mae_points": 3.66
+      },
+      "test_mean_pixel_iou": {
+        "value": 0.41,
+        "images": 51,
+        "note": "Per image class-aware IoU of predicted vs labeled defect pixels at conf 0.25, test images with a labeled defect"
       }
     }
   },
@@ -364,6 +379,20 @@
         }
       },
       "test_checkpoint_sha256": "694a8e808093ebaa5c1a1847b4f7cf0b356223f311d44bc8b1506c8297c5209e"
+    }
+  },
+  "dataset_stats": {
+    "median_defect_area_pct_of_fruit_train": {
+      "apple": {
+        "bruise_discoloration": 11.3,
+        "rot_mold_decay": 48.0,
+        "surface_damage": 0.35
+      },
+      "tomato": {
+        "bruise_discoloration": 7.4,
+        "rot_mold_decay": 3.5,
+        "surface_damage": 0.46
+      }
     }
   }
 }
