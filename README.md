@@ -32,6 +32,11 @@ Mask metrics. Each test set was evaluated once after the model was frozen.
 The combined model scored 0.600 validation mAP50 over both fruits. Stage 1 segments the whole fruit at 0.95 to 0.99
 mask mAP50. Full numbers are in `runs/final_metrics.json`. All 24 runs from the first pilot are in `runs/run_history.csv`.
 
+## Online app
+
+The app runs on Streamlit Community Cloud from this repository (branch `final-defense`, main file
+`streamlit_app.py`, Python 3.11). All six checkpoints are in `models/`.
+
 ## Run the app locally
 
 ```bash
