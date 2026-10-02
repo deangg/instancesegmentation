@@ -167,3 +167,5 @@ models/*.pt
 *.pt
 .DS_Store
 ~$*
+ai_usage/*.md
+!ai_usage/README.md
