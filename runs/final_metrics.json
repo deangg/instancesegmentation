@@ -205,7 +205,11 @@
         }
       },
       "test_checkpoint_sha256": "3dbe627b2171975004c21e130d3902d455eefb776906dd46ccf75434d805c6ff",
-      "near_duplicate_check": null
+      "near_duplicate_check": {
+        "method": "16x16 difference hash, <=20 of 256 bits from any training image",
+        "test": "0 of 95",
+        "valid": "1 of 132"
+      }
     }
   },
   "apple_tomato": {
