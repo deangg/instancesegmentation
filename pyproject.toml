@@ -5,7 +5,7 @@ description = "Two-stage YOLO26 instance segmentation of visible post-harvest fr
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
-    "ultralytics==8.4.126",
+    "ultralytics==8.4.165",
     "streamlit>=1.50",
     "pandas",
     "opencv-python-headless",
